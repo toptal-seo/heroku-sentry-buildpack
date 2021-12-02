@@ -6,6 +6,7 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
 SENTRY_ENVIRONMENT=$(cat $ENV_DIR/ENVIRONMENT_NAME);
+mkdir -p "$BUILD_DIR/vendor/env"
 echo "$SENTRY_ENVIRONMENT" > "$BUILD_DIR/vendor/env/SENTRY_ENVIRONMENT"
 cat "$BUILD_DIR/vendor/env/SENTRY_ENVIRONMENT"
 # Install Sentry CLI
