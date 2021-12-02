@@ -8,7 +8,7 @@ BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 SENTRY_ENVIRONMENT=$(cat $ENV_DIR/ENVIRONMENT_NAME);
 mkdir -p "$BUILD_DIR/vendor/env"
 echo "$SENTRY_ENVIRONMENT" > "$BUILD_DIR/vendor/env/SENTRY_ENVIRONMENT"
-cat "$BUILD_DIR/vendor/env/SENTRY_ENVIRONMENT"
+#cat "$BUILD_DIR/vendor/env/SENTRY_ENVIRONMENT"
 # Install Sentry CLI
 mkdir -p "$BUILD_DIR/vendor/bin"
 SENTRY_URL_INFO=$(curl -sL https://sentry.io/get-cli/ | grep SENTRY_DOWNLOAD_Linux_x86_64)
