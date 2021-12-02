@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e  # Exit on any failure
 
 BUILD_DIR=$1
 CACHE_DIR=${2:-}
