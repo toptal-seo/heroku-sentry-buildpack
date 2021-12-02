@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+BUILD_DIR=$1
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
+
+echo "-----> Running Sentry Buildpack"
+# Install Sentry CLI
+mkdir -p "$BUILD_DIR/vendor/bin"
+export $(curl -sL https://sentry.io/get-cli/ | grep SENTRY_DOWNLOAD_Linux_x86_64)
+SENTRY_VERSION=${SENTRY_DOWNLOAD_Linux_x86_64:45:6}
+echo "-----> Downloading modern Sentry: $SENTRY_DOWNLOAD_Linux_x86_64, version: $SENTRY_VERSION"
+curl --silent -L -o "$CACHE_DIR/sentry-cli-$SENTRY_VERSION" $SENTRY_DOWNLOAD_Linux_x86_64
+cp "$CACHE_DIR/sentry-cli-$SENTRY_VERSION" "$BUILD_DIR/vendor/bin/sentry-cli"
+chmod a+x "$BUILD_DIR/vendor/bin/sentry-cli"
+
+# Setting environment variables in .profile.d script (sourced at dyno startup)
+echo "-----> Setting Environment Variables"
+mkdir -p "$BUILD_DIR/.profile.d"
+cp "$BP_DIR"/profile/* "$BUILD_DIR/.profile.d/"
+echo "-----> Done"
+exit 0
