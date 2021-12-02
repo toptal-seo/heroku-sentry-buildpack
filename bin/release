@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+set -e  # Exit on any failure
+eval "$(sentry-cli bash-hook)"
+echo "Releasing Sentry Buildpack"
 cat <<EOF
 ---
 EOF
