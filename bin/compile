@@ -5,7 +5,9 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
-echo "-----> Running Sentry Buildpack"
+export SENTRY_ENVIRONMENT=$(cat $ENV_DIR/ENVIRONMENT_NAME);
+
+echo "-----> Running Sentry Buildpack (Env: $SENTRY_ENVIRONMENT)"
 # Install Sentry CLI
 mkdir -p "$BUILD_DIR/vendor/bin"
 SENTRY_URL_INFO=$(curl -sL https://sentry.io/get-cli/ | grep SENTRY_DOWNLOAD_Linux_x86_64)
