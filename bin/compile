@@ -11,9 +11,9 @@ mkdir -p "$BUILD_DIR/vendor/bin"
 SENTRY_URL_INFO=$(curl -sL https://sentry.io/get-cli/ | grep SENTRY_DOWNLOAD_Linux_x86_64)
 echo "Gotten recent url info: $SENTRY_URL_INFO"
 SENTRY_VERSION=${SENTRY_URL_INFO:74:6}
-SENTRY_URL=${$SENTRY_URL_INFO:30:-1}
+SENTRY_URL=${SENTRY_URL_INFO:30:-1}
 echo "-----> Downloading modern Sentry: $SENTRY_URL, version: $SENTRY_VERSION"
-curl -L -o "$CACHE_DIR/sentry-cli-$SENTRY_VERSION" $SENTRY_URL
+curl -L -o "$CACHE_DIR/sentry-cli-$SENTRY_VERSION" "$SENTRY_URL"
 ls -al "$CACHE_DIR"
 cp "$CACHE_DIR/sentry-cli-$SENTRY_VERSION" "$BUILD_DIR/vendor/bin/sentry-cli"
 chmod a+x "$BUILD_DIR/vendor/bin/sentry-cli"
